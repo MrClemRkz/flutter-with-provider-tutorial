@@ -6,7 +6,7 @@ import 'my_app.dart';
 
 void main() {
   runApp(Provider<Flavor>.value(
-    value: Flavor.dev,
+    value: Flavor.staging,
     child: const MyApp(),
   ));
 }
