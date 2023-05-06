@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ChangeNotifierProvider<Counter>(
-        create: (context) => Counter(),
+      home: ChangeNotifierProvider<ValueNotifier<int>>(
+        create: (context) => ValueNotifier<int>(0),
         child: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    final counter = Provider.of<Counter>(context, listen: false);
+    final counter = Provider.of<ValueNotifier<int>>(context, listen: false);
     final flavor = Provider.of<Flavor>(context);
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +85,7 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Consumer<Counter>(
+            Consumer<ValueNotifier<int>>(
               builder: (context, counter, child) => Text(
                 '${counter.value}',
                 style: Theme.of(context).textTheme.headline4,
@@ -95,7 +95,7 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counter.increment,
+        onPressed: () => counter.value++,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
